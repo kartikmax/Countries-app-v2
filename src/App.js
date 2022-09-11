@@ -1,11 +1,10 @@
 import React from 'react'
+import TableCountry from './components/TableCountry'
 
-const App = () => {
+export default function App() {
   return (
-    <div>
-      hello world
-    </div>
+    <>
+      <TableCountry/>
+    </>
   )
 }
-
-export default App

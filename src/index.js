@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ApolloProvider, InMemoryCache,ApolloClient } from "@apollo/client";
 const client = new ApolloClient({
-  uri: "https://staging-graphql.supportgenie.io/graphql",
+  uri: "https://countries.trevorblades.com",
   cache: new InMemoryCache(),
 });
 
