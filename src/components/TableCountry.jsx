@@ -75,8 +75,9 @@ export default function TableCountry() {
               <TableCell>Country Capital</TableCell>
               <TableCell>Country Calling Code</TableCell>
               <TableCell>Flag</TableCell>
-              <TableCell>Add</TableCell>
               <TableCell>Currency</TableCell>
+              <TableCell>Languages</TableCell>
+              <TableCell>Add</TableCell>
             </TableRow>
             {Data2.map((rows, i) => (
               <TableRow key={rows.countryCallingCodes}>
@@ -92,10 +93,13 @@ export default function TableCountry() {
                     alt={rows.name}
                   />
                 </TableCell>
+                
                 <TableCell>
-                  <Button color="primary" variant="contained">
-                    +
-                  </Button>
+                  <ol>
+                    {rows.languages.map((lang) => (
+                      <li key={lang}>{lang}</li>
+                    ))}
+                  </ol>
                 </TableCell>
                 <TableCell>
                   <ol>
@@ -103,6 +107,11 @@ export default function TableCountry() {
                       <li key={currency}>{currency}</li>
                     ))}
                   </ol>
+                </TableCell>
+                <TableCell>
+                  <Button color="primary" variant="contained">
+                    +
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
