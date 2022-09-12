@@ -1,5 +1,7 @@
 // import { throwServerError } from "@apollo/client";
 import {
+  Button,
+  createTheme,
   makeStyles,
   Paper,
   Table,
@@ -10,39 +12,76 @@ import {
 } from "@material-ui/core";
 import { mutate, tidy } from "@tidyjs/tidy";
 import React from "react";
-// import { useId } from "react";
 import Data from "./countries.json";
+import { useEffect ,useState} from "react";
+import { myData } from "./FetchApi";
+
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: "#98ff98",
+      main: "#4aa02c",
+      dark: "#002884",
+      contrastText: "#fff",
+    },
+    secondary: {
+      light: "#ff7961",
+      main: "#f44336",
+      dark: "#ba000d",
+      contrastText: "#000",
+    },
+  },
+});
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 450,
+    minWidth: 350,
+    background: theme.palette.primary.light,
+    border: `2px solid ${theme.palette.primary.main}`,
+  },
+  tableContainer: {
+    maxWidth: 1000,
+    margin: 30,
   },
 });
 
 export default function TableCountry() {
-  const classes = useStyles();
-  //   const id = useId();
+  const [countryData, setCountryData] = useState();
+  useEffect(() => {
+    if (myData) {
+      setCountryData(myData);
+    }
+  }, []);
 
-  // const countryImgLink = ;
+ 
+
+  console.log(countryData,"fetched")
+  const classes = useStyles();
   const Data2 = tidy(
     Data,
     mutate({
       countryImgLink: (x) =>
         `https://flagcdn.com/256x192/${x.alpha2.toLowerCase()}.png`,
+      // capital:myData
     })
   );
 
+
+
   return (
     <div>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} className={classes.tableContainer}>
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
               <TableCell>Sr. No.</TableCell>
-              <TableCell> Country name</TableCell>
-              <TableCell>country capital</TableCell>
-              <TableCell>country calling code</TableCell>
-              <TableCell>Image</TableCell>
+              <TableCell>Country name</TableCell>
+              <TableCell>Country Capital</TableCell>
+              <TableCell>Country Calling Code</TableCell>
+              <TableCell>Flag</TableCell>
+              <TableCell>Add</TableCell>
+              <TableCell>Currency</TableCell>
             </TableRow>
             {Data2.map((rows, i) => (
               <TableRow key={rows.countryCallingCodes}>
@@ -51,13 +90,24 @@ export default function TableCountry() {
                 <TableCell>{rows.alpha2}</TableCell>
                 <TableCell>{rows.countryCallingCodes}</TableCell>
                 <TableCell>
-                  {/* <img src="" alt={rows.alpha2}/> */}
                   <img
                     src={rows.countryImgLink}
                     width="75"
                     height="50"
                     alt={rows.name}
-                  ></img>
+                  />
+                </TableCell>
+                <TableCell>
+                  <Button color="primary" variant="contained">
+                    +
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <ol>
+                    {rows.currencies.map((currency) => (
+                      <li key={currency}>{currency}</li>
+                    ))}
+                  </ol>
                 </TableCell>
               </TableRow>
             ))}
