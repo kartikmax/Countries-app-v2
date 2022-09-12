@@ -7,4 +7,4 @@ async function countryData() {
 }
 
 let a = countryData();
-export const myData = a.then();
+export let myData = a.then();

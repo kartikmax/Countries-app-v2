@@ -13,9 +13,8 @@ import {
 import { mutate, tidy } from "@tidyjs/tidy";
 import React from "react";
 import Data from "./countries.json";
-import { useEffect ,useState} from "react";
+import { useEffect, useState } from "react";
 import { myData } from "./FetchApi";
-
 
 const theme = createTheme({
   palette: {
@@ -54,9 +53,7 @@ export default function TableCountry() {
     }
   }, []);
 
- 
-
-  console.log(countryData,"fetched")
+  console.log(countryData, "fetched");
   const classes = useStyles();
   const Data2 = tidy(
     Data,
@@ -66,8 +63,6 @@ export default function TableCountry() {
       // capital:myData
     })
   );
-
-
 
   return (
     <div>

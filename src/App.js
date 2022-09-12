@@ -1,12 +1,12 @@
 import React from "react";
+import Analytics from "./components/Analytics";
 import TableCountry from "./components/TableCountry";
 
 export default function App() {
-  // console.log(myData,"fetched data")
-  
   return (
     <>
       <TableCountry />
+      {/* <Analytics/> */}
     </>
   );
 }
